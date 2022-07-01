@@ -33,7 +33,6 @@ const Downloader = forwardRef(({}, forwardRef) => {
 
   return (
     <div>
-      {/* <textarea id="textbox">Type something here</textarea> */}
       <button
         id="create"
         onClick={() => {
@@ -47,7 +46,6 @@ const Downloader = forwardRef(({}, forwardRef) => {
                 '[object HTMLAnchorElement]'
             )
               throw new Error('get link failed');
-            debugger;
             link.href = makeTextFile(href);
             link.click && link.click();
           } catch (error) {
@@ -57,12 +55,10 @@ const Downloader = forwardRef(({}, forwardRef) => {
       >
         下载tsx文件
       </button>
-      {/* <button id="create">Create file</button> */}
       <a
         download="index.tsx"
         id="downloadlink"
         style={{ display: 'none' }}
-        // href={href}
         ref={alinkref}
       >
         Download
