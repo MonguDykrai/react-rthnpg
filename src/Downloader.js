@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useEffect,
+  useState,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
 import './style.css';
 
-export default function Downloader() {
+const Downloader = forwardRef(({}, forwardRef) => {
   const [href, setHref] = useState('');
   const alinkref = React.createRef();
   const makeTextFile = (text) => {
+    let textFile = '';
     var data = new Blob([text], { type: 'text/plain' });
 
     // If we are replacing a previously generated file we need to
@@ -20,12 +26,19 @@ export default function Downloader() {
     return textFile;
   };
 
+  useImperativeHandle(forwardRef, () => ({
+    makeTextFile,
+    setHref,
+  }));
+
   return (
     <div>
       {/* <textarea id="textbox">Type something here</textarea> */}
       <button
         id="create"
         onClick={() => {
+          if (href.length === 0) return;
+
           try {
             const link = alinkref.current;
             if (
@@ -34,6 +47,8 @@ export default function Downloader() {
                 '[object HTMLAnchorElement]'
             )
               throw new Error('get link failed');
+            debugger;
+            link.href = makeTextFile(href);
             link.click && link.click();
           } catch (error) {
             console.log(error);
@@ -47,11 +62,13 @@ export default function Downloader() {
         download="index.tsx"
         id="downloadlink"
         style={{ display: 'none' }}
-        href={href}
+        // href={href}
         ref={alinkref}
       >
         Download
       </a>
     </div>
   );
-}
+});
+
+export default Downloader;
