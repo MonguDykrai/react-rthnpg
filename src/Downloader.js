@@ -1,13 +1,7 @@
-import React, {
-  useEffect,
-  useState,
-  forwardRef,
-  useImperativeHandle,
-} from 'react';
+import React, { forwardRef } from 'react';
 import './style.css';
 
 const Downloader = forwardRef(({ onDownload }, forwardRef) => {
-  const [href, setHref] = useState('');
   const alinkref = React.createRef();
   const makeTextFile = (text) => {
     let textFile = '';
@@ -26,11 +20,6 @@ const Downloader = forwardRef(({ onDownload }, forwardRef) => {
     return textFile;
   };
 
-  useImperativeHandle(forwardRef, () => ({
-    makeTextFile,
-    setHref,
-  }));
-
   return (
     <div>
       <button
@@ -48,7 +37,6 @@ const Downloader = forwardRef(({ onDownload }, forwardRef) => {
             )
               throw new Error('get link failed');
             link.href = makeTextFile(text);
-            // link.href = makeTextFile(href);
             link.click && link.click();
           } catch (error) {
             console.log(error);
