@@ -15,7 +15,13 @@ export default function App() {
           setValue(value);
         }}
       ></textarea>
-      <Downloader text={value} />
+      <Downloader
+        // text={value}
+        onDownload={(setValue) => {
+          if (setValue) return setValue(value);
+          return '';
+        }}
+      />
     </div>
   );
 }

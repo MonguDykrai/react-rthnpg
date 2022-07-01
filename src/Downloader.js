@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import './style.css';
 
-const Downloader = forwardRef(({ text }, forwardRef) => {
+const Downloader = forwardRef(({ onDownload }, forwardRef) => {
   const [href, setHref] = useState('');
   const alinkref = React.createRef();
   const makeTextFile = (text) => {
@@ -36,6 +36,7 @@ const Downloader = forwardRef(({ text }, forwardRef) => {
       <button
         id="create"
         onClick={() => {
+          const text = onDownload((text) => text);
           if (text.length === 0) return;
 
           try {
