@@ -3,7 +3,6 @@ import './style.css';
 import Downloader from './Downloader';
 
 export default function App() {
-  const downloader = useRef();
   const [value, setValue] = useState('');
   return (
     <div>
@@ -14,10 +13,9 @@ export default function App() {
         onChange={(e) => {
           const { value } = e.target;
           setValue(value);
-          downloader.current.setHref(value);
         }}
       ></textarea>
-      <Downloader ref={downloader} />
+      <Downloader text={value} />
     </div>
   );
 }

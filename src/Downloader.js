@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import './style.css';
 
-const Downloader = forwardRef(({}, forwardRef) => {
+const Downloader = forwardRef(({ text }, forwardRef) => {
   const [href, setHref] = useState('');
   const alinkref = React.createRef();
   const makeTextFile = (text) => {
@@ -36,7 +36,7 @@ const Downloader = forwardRef(({}, forwardRef) => {
       <button
         id="create"
         onClick={() => {
-          if (href.length === 0) return;
+          if (text.length === 0) return;
 
           try {
             const link = alinkref.current;
@@ -46,7 +46,8 @@ const Downloader = forwardRef(({}, forwardRef) => {
                 '[object HTMLAnchorElement]'
             )
               throw new Error('get link failed');
-            link.href = makeTextFile(href);
+            link.href = makeTextFile(text);
+            // link.href = makeTextFile(href);
             link.click && link.click();
           } catch (error) {
             console.log(error);
