@@ -12,9 +12,9 @@ export default function App() {
         id="textbox"
         value={value}
         onChange={(e) => {
-          setValue(e.target.value);
-          console.log(downloader);
-          downloader.current.setHref(e.target.value);
+          const { value } = e.target;
+          setValue(value);
+          downloader.current.setHref(value);
         }}
       ></textarea>
       <Downloader ref={downloader} />
