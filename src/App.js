@@ -6,6 +6,7 @@ export default function App() {
   return (
     <div>
       <h1>downloader example</h1>
+      <textarea id="textbox">Type something here</textarea>
       <Downloader />
     </div>
   );
